@@ -25,4 +25,4 @@ front_cloze = file_to_string(
 
 back_cloze = file_to_string(path_relative_to_this_file("html/back_cloze.html"))
 
-css = file_to_string(path_relative_to_this_file("css/style.css"))
+css = read_file("css/style_import.css")

@@ -1,0 +1,20 @@
+/* Replace with your own styles and make sure to mark properties 
+ * that should be overwritten as !important
+
+
+// Overwriting fields example
+.nightMode, .night-mode, .night_mode {
+  background-color: #1e1e2e !important;
+  color: #cdd6f4 !important;
+}
+.nightMode code {
+  filter: unset !important;
+}
+
+// Fields not set in "style.css" do not need to be overwritten
+// (i.e. !important is not necessary here)
+.field {
+  display: inline-block;
+  text-align: left;
+}
+*/
