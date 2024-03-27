@@ -12,7 +12,7 @@ CONF_NAME = "MDKATEX"
 
 def markdownPreview(editor):
     """This function runs when the user opens the editor, creates the markdown preview area"""
-    if editor.note.model()["name"] in [
+    if editor.note.note_type()["name"] in [
         MODEL_NAME + " Basic (Color)",
         MODEL_NAME + " Cloze (Color)",
     ]:
@@ -34,8 +34,8 @@ def create_model_if_necessacy():
     Runs when the user opens Anki, creates the two card types and also handles updating
     the card types CSS and HTML if the addon has a pending update
     """
-    model = mw.col.models.byName(MODEL_NAME + " Basic (Color)")
-    model_cloze = mw.col.models.byName(MODEL_NAME + " Cloze (Color)")
+    model = mw.col.models.by_name(MODEL_NAME + " Basic (Color)")
+    model_cloze = mw.col.models.by_name(MODEL_NAME + " Cloze (Color)")
 
     if not model:
         create_model()
@@ -90,8 +90,8 @@ def create_model_cloze():
 
 def update():
     """Updates the card types the addon has a pending update"""
-    model = mw.col.models.byName(MODEL_NAME + " Basic (Color)")
-    model_cloze = mw.col.models.byName(MODEL_NAME + " Cloze (Color)")
+    model = mw.col.models.by_name(MODEL_NAME + " Basic (Color)")
+    model_cloze = mw.col.models.by_name(MODEL_NAME + " Cloze (Color)")
 
     model["tmpls"][0]["qfmt"] = front
     model["tmpls"][0]["afmt"] = back
