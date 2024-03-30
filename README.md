@@ -51,6 +51,32 @@ def print_hello():
 - support for dark mode
 
 
+## Customizing Styles
+It's possible to customize the note style by editing **"user_style.css"** inside the media folder. To find out where your media folder is, please refer to the [Anki documentation](https://docs.ankiweb.net/files.html#file-locations).
+
+If a value has already been set inside the default **"style.css"**, you can overwrite it by using the `!important` flag.
+If you want to remove a value, you can also use the `unset` keyword.
+
+```css
+/* user_style.css example */
+
+.nightMode, .night-mode, .night_mode {
+  background-color: #1e1e2e !important; /* overwrite value */
+}
+.nightMode code {
+  filter: unset !important; /* remove value */
+}
+
+/* !important is not necessary here since ".field" is not set in "style.css" */
+.field {
+  display: inline-block;
+  text-align: left;
+}
+
+```
+
+The markdown preview will automatically follow all user style modifications.
+
 ## Used Libraries
 <a href="https://github.com/markdown-it/markdown-it">Markdown-It</a>  
 <a href="https://github.com/KaTeX/KaTeX">KaTeX</a>
