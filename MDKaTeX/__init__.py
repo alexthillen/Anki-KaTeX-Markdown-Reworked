@@ -1,7 +1,7 @@
 import os
 import shutil
 
-from .HTMLandCSS import HTMLforEditor, front, back, front_cloze, back_cloze, css
+from .HTMLandCSS import HTMLforEditor, read_file, front, back, front_cloze, back_cloze, css
 from aqt import mw
 from anki.hooks import addHook
 import anki
@@ -12,7 +12,7 @@ CONF_NAME = "MDKATEX"
 
 def markdownPreview(editor):
     """This function runs when the user opens the editor, creates the markdown preview area"""
-    if editor.note.model()["name"] in [
+    if editor.note.note_type()["name"] in [
         MODEL_NAME + " Basic (Color)",
         MODEL_NAME + " Cloze (Color)",
     ]:
@@ -34,8 +34,8 @@ def create_model_if_necessacy():
     Runs when the user opens Anki, creates the two card types and also handles updating
     the card types CSS and HTML if the addon has a pending update
     """
-    model = mw.col.models.byName(MODEL_NAME + " Basic (Color)")
-    model_cloze = mw.col.models.byName(MODEL_NAME + " Cloze (Color)")
+    model = mw.col.models.by_name(MODEL_NAME + " Basic (Color)")
+    model_cloze = mw.col.models.by_name(MODEL_NAME + " Cloze (Color)")
 
     if not model:
         create_model()
@@ -90,8 +90,8 @@ def create_model_cloze():
 
 def update():
     """Updates the card types the addon has a pending update"""
-    model = mw.col.models.byName(MODEL_NAME + " Basic (Color)")
-    model_cloze = mw.col.models.byName(MODEL_NAME + " Cloze (Color)")
+    model = mw.col.models.by_name(MODEL_NAME + " Basic (Color)")
+    model_cloze = mw.col.models.by_name(MODEL_NAME + " Cloze (Color)")
 
     model["tmpls"][0]["qfmt"] = front
     model["tmpls"][0]["afmt"] = back
@@ -112,7 +112,8 @@ def update():
 
     addon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)))
 
-    _add_file(os.path.join(addon_path, "css",  "style.css"), "style.css")
+    _write_data("style.css", bytes(read_file("css/style.css"), 'utf-8'))
+    _add_file(os.path.join(addon_path, "css",  "user_style.css"), "user_style.css")
     _add_file(os.path.join(addon_path, "_katex.min.js"), "_katex.min.js")
     _add_file(os.path.join(addon_path, "_katex.css"), "_katex.css")
     _add_file(os.path.join(addon_path, "_auto-render.js"), "_auto-render.js")
@@ -131,6 +132,11 @@ def update():
 def _add_file(path, filename):
     if not os.path.isfile(os.path.join(mw.col.media.dir(), filename)):
         mw.col.media.add_file(path)
+
+
+def _write_data(filename, data):
+    mw.col.media.trash_files([filename])
+    mw.col.media.write_data(filename, data)
 
 
 addHook("profileLoaded", create_model_if_necessacy)
