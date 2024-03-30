@@ -89,4 +89,6 @@ to see how to install this addon for anki
 
 Fork of : https://github.com/Jwrede/Anki-KaTeX-Markdown.
 
-Special Thanks to [Jwrede](https://github.com/Jwrede) for starting this project.
+## Credits to
+- [Jwrede](https://github.com/Jwrede) for starting this cool project.
+- [Eljamm](https://github.com/eljamm) for his substantial contributions wrt dynamic styling and significantly enhancing the code's maintainability.
