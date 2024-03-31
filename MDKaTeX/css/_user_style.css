@@ -11,7 +11,7 @@
   filter: unset !important;
 }
 
-// Fields not set in "style.css" do not need to be overwritten
+// Fields not set in "_style.css" do not need to be overwritten
 // (i.e. !important is not necessary here)
 .field {
   display: inline-block;

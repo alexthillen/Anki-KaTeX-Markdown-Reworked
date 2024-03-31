@@ -52,13 +52,13 @@ def print_hello():
 
 
 ## Customizing Styles
-It's possible to customize the note style by editing **"user_style.css"** inside the media folder. To find out where your media folder is, please refer to the [Anki documentation](https://docs.ankiweb.net/files.html#file-locations).
+It's possible to customize the note style by editing **"_user_style.css"** inside the media folder. To find out where your media folder is, please refer to the [Anki documentation](https://docs.ankiweb.net/files.html#file-locations).
 
-If a value has already been set inside the default **"style.css"**, you can overwrite it by using the `!important` flag.
+If a value has already been set inside the default **"_style.css"**, you can overwrite it by using the `!important` flag.
 If you want to remove a value, you can also use the `unset` keyword.
 
 ```css
-/* user_style.css example */
+/* _user_style.css example */
 
 .nightMode, .night-mode, .night_mode {
   background-color: #1e1e2e !important; /* overwrite value */
@@ -67,7 +67,7 @@ If you want to remove a value, you can also use the `unset` keyword.
   filter: unset !important; /* remove value */
 }
 
-/* !important is not necessary here since ".field" is not set in "style.css" */
+/* !important is not necessary here since ".field" is not set in "_style.css" */
 .field {
   display: inline-block;
   text-align: left;

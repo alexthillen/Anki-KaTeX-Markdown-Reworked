@@ -112,8 +112,8 @@ def update():
 
     addon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)))
 
-    _write_data("style.css", bytes(read_file("css/style.css"), 'utf-8'))
-    _add_file(os.path.join(addon_path, "css",  "user_style.css"), "user_style.css")
+    _write_data("_style.css", bytes(read_file("css/_style.css"), 'utf-8'))
+    _add_file(os.path.join(addon_path, "css",  "_user_style.css"), "_user_style.css")
     _add_file(os.path.join(addon_path, "_katex.min.js"), "_katex.min.js")
     _add_file(os.path.join(addon_path, "_katex.css"), "_katex.css")
     _add_file(os.path.join(addon_path, "_auto-render.js"), "_auto-render.js")
