@@ -91,4 +91,4 @@ Fork of : https://github.com/Jwrede/Anki-KaTeX-Markdown.
 
 ## Credits to
 - [Jwrede](https://github.com/Jwrede) for starting this cool project.
-- [Eljamm](https://github.com/eljamm) for his substantial contributions wrt dynamic styling and significantly enhancing the code's maintainability.
+- [Eljamm](https://github.com/eljamm) for his substantial contributions with dynamic styling and significantly enhancing the code's maintainability.
