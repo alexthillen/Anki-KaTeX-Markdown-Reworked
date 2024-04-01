@@ -1,7 +1,7 @@
-/* To customize styles for this note type, please edit the 'user_style.css'
+/* To customize styles for this note type, please edit the '_user_style.css'
  * file in your collection media folder.
  * 
  * To find it, please refer to: https://docs.ankiweb.net/files.html#file-locations */
 
-@import url(style.css);
-@import url(user_style.css);
+@import url(_style.css);
+@import url(_user_style.css);
