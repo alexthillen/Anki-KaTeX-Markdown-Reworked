@@ -12,8 +12,28 @@ area.style.height = '100%';
 var fields = document.getElementById('fields');
 if (fields !== null) {
   keyupFunc = function () {
-    var text = '# Field 1\n' + fields.children[0].children[1].shadowRoot.children[2].innerHTML;
-    text += "\n# Field 2\n" + fields.children[1].children[1].shadowRoot.children[2].innerHTML;
+    var text = "";
+    var childElements = fields.children;
+
+    for (var i = 0; i < childElements.length; i++) {
+      var element = childElements[i];
+      var richTextElement = element.children[1];
+
+      // Display field if richTextElement exists
+      if (richTextElement && richTextElement.shadowRoot) {
+        var shadowRootChildren = richTextElement.shadowRoot.children;
+
+        if (shadowRootChildren.length >= 3) {
+          var field_text = shadowRootChildren[2].innerHTML;
+          var field_name = element.getElementsByClassName("label-name")[0].textContent;
+
+          // Only display non-empty fields
+          if (field_text.trim() !== '' && field_text.trim() !== '<br>') {
+            text += `\n# ${field_name}\n` + field_text;
+          }
+        }
+      }
+    }
     render(text);
   }
 
@@ -24,8 +44,28 @@ else {
   var fields = document.getElementsByClassName('fields')[0];
 
   keyupFunc = function () {
-    var text = '# Field 1\n' + fields.children[0].getElementsByClassName("rich-text-editable")[0].shadowRoot.children[2].innerHTML;
-    text += "\n# Field 2\n" + fields.children[1].getElementsByClassName("rich-text-editable")[0].shadowRoot.children[2].innerHTML;
+    var text = "";
+    var childElements = fields.children;
+
+    for (var i = 0; i < childElements.length; i++) {
+      var element = childElements[i];
+      var richTextElement = element.getElementsByClassName("rich-text-editable")[0];
+
+      // Display field if richTextElement exists
+      if (richTextElement && richTextElement.shadowRoot) {
+        var shadowRootChildren = richTextElement.shadowRoot.children;
+
+        if (shadowRootChildren.length >= 3) {
+          var field_text = shadowRootChildren[2].innerHTML;
+          var field_name = element.getElementsByClassName("label-name")[0].textContent;
+
+          // Only display non-empty fields
+          if (field_text.trim() !== '' && field_text.trim() !== '<br>') {
+            text += `\n# ${field_name}\n` + field_text;
+          }
+        }
+      }
+    }
     render(text);
   }
 

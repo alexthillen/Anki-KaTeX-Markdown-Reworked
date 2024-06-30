@@ -1,5 +1,6 @@
 import os
 import shutil
+import re
 
 from .HTMLandCSS import HTMLforEditor, read_file, front, back, front_cloze, back_cloze, css
 from aqt import mw
@@ -12,16 +13,16 @@ CONF_NAME = "MDKATEX"
 
 def markdownPreview(editor):
     """This function runs when the user opens the editor, creates the markdown preview area"""
-    if editor.note.note_type()["name"] in [
-        MODEL_NAME + " Basic (Color)",
-        MODEL_NAME + " Cloze (Color)",
-    ]:
+    note_type = editor.note.note_type()["name"]
+    flags = re.IGNORECASE
+
+    if re.match(r".*KaTeX.*|.*Markdown.*", note_type, flags):
         editor.web.eval(HTMLforEditor)
     else:  # removes the markdown preview
         editor.web.eval(
-            """
-					var area = document.getElementById('markdown-area');
-					if(area) area.remove();
+        """
+        var area = document.getElementById('markdown-area');
+        if(area) area.remove();
         """
         )
 
