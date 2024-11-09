@@ -1,17 +1,22 @@
-.card, .fields {
+.card,
+.fields {
   font-family: arial;
   font-size: 20px;
   color: black;
   background-color: white;
 }
 
-table, th, td {
-	border: 1px solid black;
-	border-collapse: collapse;
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
 }
 
-#front, #back, #extra {
-	visibility: hidden;
+#front,
+#back,
+#extra {
+  visibility: hidden;
 }
 
 pre code {
@@ -22,16 +27,18 @@ pre code {
 }
 
 .cloze {
-	color: #42C0FB !important;
-  display: inline-block;
+  color: #42C0FB !important;
+  display: inline-flex;
 }
 
 .cloze-inactive {
   display: inline-block;
 }
 
-.nightMode, .night-mode, .night_mode {
-  background-color: #0f0f0f !important; 
+.nightMode,
+.night-mode,
+.night_mode {
+  background-color: #0f0f0f !important;
   color: #c0c0c0 !important;
 }
 

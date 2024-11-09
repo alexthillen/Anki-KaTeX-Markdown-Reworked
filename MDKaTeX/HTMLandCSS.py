@@ -1,4 +1,5 @@
 """ This file contains all the HTML / CSS strings for the different card types """
+
 import os
 
 
@@ -21,11 +22,13 @@ HTMLforEditor = read_file("js/HTMLforEditor.js")
 
 script_base = read_file("html/script_base.html")
 script_cloze = read_file("html/script_cloze.html")
+script_cloze_show = read_file("html/script_cloze_show.html")
 
 front = read_file("html/front.html") + script_base
 back = read_file("html/back.html") + script_base
 
 front_cloze = read_file("html/front_cloze.html") + script_cloze
+front_cloze_show = read_file("html/front_cloze.html") + script_cloze_show
 back_cloze = read_file("html/back_cloze.html") + script_cloze
 
 css = read_file("css/style_import.css")
