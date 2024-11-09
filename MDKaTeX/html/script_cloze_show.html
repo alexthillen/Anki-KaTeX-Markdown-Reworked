@@ -220,7 +220,6 @@
   }
 
   function restoreHTMLElementsInString(str) {
-    console.log(str);
     for (let i = 0; i < restoreElements.length; i++) {
       if (restoreElements[i].is_plaintext) {
         str = str.replaceAll(restoreElements[i].from, restoreElements[i].to);
