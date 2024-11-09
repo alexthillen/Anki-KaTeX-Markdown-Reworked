@@ -73,9 +73,47 @@
     fields.forEach((element) => {
       renderMath(element.id);
       markdown(element.id);
+      add_show_button(element.id);
     });
     show();
   }
+
+  var cloze_shown = 0;
+  function add_show_button(ID) {
+    let element = document.getElementById(ID);
+    // get all cloze spans of the form <span class="cloze" data-cloze="this is the answer" data-ordinal="2">[this is the hint]</span>
+    let clozes = [...element.getElementsByClassName("cloze")];
+    clozes = clozes.filter((cloze) => cloze.getAttribute("data-cloze") !== null);
+
+    // Add a button after each cloze span
+    clozes.forEach((cloze) => {
+      // Create the button element
+      let button = document.createElement("button");
+      button.textContent = "Show Answer"; // Text for the button
+      button.style.padding = "4px 6px";
+      button.style.margin = "1px";
+      button.addEventListener("click", () => {
+        button.remove();
+        // Replace the content of the cloze span with the answer
+        cloze.innerHTML = cloze.getAttribute("data-cloze");
+        // set cloze id to "cloze-{cloze_shown}"
+        cloze.id = `cloze-${cloze_shown}`;
+        renderMath(cloze.id);
+        markdown(cloze.id);
+
+        cloze.innerHTML = cloze.children[0].innerHTML;
+
+        cloze_shown++;
+
+        if (cloze_shown === clozes.length) {
+          // TODO : is there an option to trigger the "Show Answer" Anki button?
+        }
+      });
+      // Insert the button after the cloze span
+      cloze.insertAdjacentElement("afterend", button);
+    });
+  }
+
 
   function show() {
     fields.forEach((element) => {

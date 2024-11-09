@@ -2,7 +2,16 @@ import os
 import shutil
 import re
 
-from .HTMLandCSS import HTMLforEditor, read_file, front, back, front_cloze, back_cloze, css
+from .HTMLandCSS import (
+    HTMLforEditor,
+    read_file,
+    front,
+    back,
+    front_cloze,
+    back_cloze,
+    front_cloze_show,
+    css,
+)
 from aqt import mw
 from anki.hooks import addHook
 import anki
@@ -20,7 +29,7 @@ def markdownPreview(editor):
         editor.web.eval(HTMLforEditor)
     else:  # removes the markdown preview
         editor.web.eval(
-        """
+            """
         var area = document.getElementById('markdown-area');
         if(area) area.remove();
         """
@@ -37,11 +46,14 @@ def create_model_if_necessacy():
     """
     model = mw.col.models.by_name(MODEL_NAME + " Basic (Color)")
     model_cloze = mw.col.models.by_name(MODEL_NAME + " Cloze (Color)")
+    model_cloze_show = mw.col.models.by_name(MODEL_NAME + " Cloze + Show Cloze (Color)")
 
     if not model:
         create_model()
     if not model_cloze:
         create_model_cloze()
+    if not model_cloze_show:
+        create_model_cloze_show()
 
     update()
 
@@ -89,10 +101,33 @@ def create_model_cloze():
     m.save(model)
 
 
+def create_model_cloze_show():
+    """Creates the Cloze Card type"""
+    m = mw.col.models
+    model = m.new(MODEL_NAME + " Cloze + Show Cloze (Color)")
+    model["type"] = anki.consts.MODEL_CLOZE
+
+    field = m.newField("Text")
+    m.addField(model, field)
+
+    field = m.newField("Back Extra")
+    m.addField(model, field)
+
+    template = m.newTemplate(MODEL_NAME + " Cloze + Show Cloze (Color)")
+    template["qfmt"] = front_cloze_show
+    template["afmt"] = back_cloze
+    model["css"] = css
+
+    m.addTemplate(model, template)
+    m.add(model)
+    m.save(model)
+
+
 def update():
     """Updates the card types the addon has a pending update"""
     model = mw.col.models.by_name(MODEL_NAME + " Basic (Color)")
     model_cloze = mw.col.models.by_name(MODEL_NAME + " Cloze (Color)")
+    model_cloze_show = mw.col.models.by_name(MODEL_NAME + " Cloze + Show Cloze (Color)")
 
     model["tmpls"][0]["qfmt"] = front
     model["tmpls"][0]["afmt"] = back
@@ -102,8 +137,13 @@ def update():
     model_cloze["tmpls"][0]["afmt"] = back_cloze
     model_cloze["css"] = css
 
+    model_cloze_show["tmpls"][0]["qfmt"] = front_cloze_show
+    model_cloze_show["tmpls"][0]["afmt"] = back_cloze
+    model_cloze_show["css"] = css
+
     mw.col.models.save(model)
     mw.col.models.save(model_cloze)
+    mw.col.models.save(model_cloze_show)
 
     if os.path.isdir(os.path.join(mw.col.media.dir(), "_katex")):
         shutil.rmtree(os.path.join(mw.col.media.dir(), "_katex"))
@@ -113,18 +153,16 @@ def update():
 
     addon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)))
 
-    _write_data("_style.css", bytes(read_file("css/_style.css"), 'utf-8'))
-    _add_file(os.path.join(addon_path, "css",  "_user_style.css"), "_user_style.css")
+    _write_data("_style.css", bytes(read_file("css/_style.css"), "utf-8"))
+    _add_file(os.path.join(addon_path, "css", "_user_style.css"), "_user_style.css")
     _add_file(os.path.join(addon_path, "_katex.min.js"), "_katex.min.js")
     _add_file(os.path.join(addon_path, "_katex.css"), "_katex.css")
     _add_file(os.path.join(addon_path, "_auto-render.js"), "_auto-render.js")
-    _add_file(os.path.join(addon_path, "_markdown-it.min.js"),
-              "_markdown-it.min.js")
+    _add_file(os.path.join(addon_path, "_markdown-it.min.js"), "_markdown-it.min.js")
     _add_file(os.path.join(addon_path, "_highlight.css"), "_highlight.css")
     _add_file(os.path.join(addon_path, "_highlight.js"), "_highlight.js")
     _add_file(os.path.join(addon_path, "_mhchem.js"), "_mhchem.js")
-    _add_file(os.path.join(addon_path, "_markdown-it-mark.js"),
-              "_markdown-it-mark.js")
+    _add_file(os.path.join(addon_path, "_markdown-it-mark.js"), "_markdown-it-mark.js")
 
     for katex_font in os.listdir(os.path.join(addon_path, "fonts")):
         _add_file(os.path.join(addon_path, "fonts", katex_font), katex_font)

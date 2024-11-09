@@ -1,5 +1,12 @@
 # Anki Markdown
 
+
+## Latest Release : New Card Type "Markdown and KaTeX Cloze + Show Cloze (Color)"
+
+![Latest Update](.github/assets/example-cloze-show-answer.gif)
+
+## How to use 
+
 [Download Anki Add-On](https://ankiweb.net/shared/info/1786114227)
 
 Adding support and improvements of how cards are displayed.
