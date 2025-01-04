@@ -28,7 +28,7 @@ pre code {
 
 .cloze {
   color: #42C0FB !important;
-  display: inline-flex;
+  display: inline-block;
 }
 
 .cloze-inactive {
