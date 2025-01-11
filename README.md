@@ -14,9 +14,9 @@ Allowing for clozes inside code blocks. Better night mode support & readability.
 
 Creates a new Basic and a new Cloze Note Type that support Markdown and KaTeX: *Markdown and KaTeX Basic (Color)* and *Markdown and KaTeX Cloze (Color)*.
 
-The following can be used to create a sample cloze card (remove the "\\" before the backticks).
+The following can be used to create a sample cloze card.
 
-```md
+````md
 # A Dummy Card
 ## Subtitle
 ### Math
@@ -26,18 +26,18 @@ $$1\$ < 1€ $$ after
 
 ### Escaped c++ code :
 
-\```cpp
+```cpp
 #include <stdio.h>
 {{c2::boost\:\:add_vertex::how to add vertex in boost}}(...);
-\```
+```
 
 ### Python
 
-\```py
+```py
 def print_hello():
   print("{{c2::hello}}")
-\```
 ```
+````
 
 ![Front Code](.github/assets/image.png)
 ![Back Code](.github/assets/image-1.png)
