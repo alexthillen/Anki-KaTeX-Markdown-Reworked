@@ -1,5 +1,7 @@
-# Anki Markdown
+# ⚠️🚨 **IMPORTANT NOTICE** 🚨⚠️
+*This add-on is archived and no longer maintained. Please switch to the new, modern, and actively maintained version: [Better Anki Markdown](https://ankiweb.net/shared/info/2100166052)*
 
+# Anki Markdown
 
 ## Latest Release : New Card Type "Markdown and KaTeX Cloze + Show Cloze (Color)"
 
